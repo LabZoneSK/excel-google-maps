@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const PORT = process.env.PORT || 5000;
 const API_VERSION = process.env.API_VERSION || 'v1';
+const API_KEY = process.env.API_KEY || '';
 
 const app = express();
 
@@ -11,7 +12,7 @@ const client = new Client();
 
 const getLocation = (address) => {
   return new Promise((resolve, reject) => {
-    client.get('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDZect4UgqzVPxbSYQJDb8x4QVx9DFyCPE&address=Košice', (data, response) => {
+    client.get('https://maps.googleapis.com/maps/api/geocode/json?key=${API_KEY}&address=Košice', (data, response) => {
       const result = data.results.shift();
       if(result.geometry) {
         resolve(result.geometry.location);
@@ -24,7 +25,7 @@ const getLocation = (address) => {
 
 const getDistance = (origins, destinations) => {
   return new Promise((resolve, reject) => {
-    const encodedURL = encodeURI(`https://maps.googleapis.com/maps/api/distancematrix/json?key=AIzaSyDZect4UgqzVPxbSYQJDb8x4QVx9DFyCPE&origins=${origins}&destinations=${destinations}`);
+    const encodedURL = encodeURI(`https://maps.googleapis.com/maps/api/distancematrix/json?key=${API_KEY}&origins=${origins}&destinations=${destinations}`);
     client.get(encodedURL, (data, response) => {
       const element = data.rows.shift().elements;
       if(element) {
