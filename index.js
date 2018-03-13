@@ -29,8 +29,13 @@ const getDistance = (origins, destinations) => {
     client.get(encodedURL, (data, response) => {
       const element = data.rows.shift().elements;
       if(element) {
-        const distance = element.shift().distance.value / 1000;
-        resolve(distance);
+        const distance = element.shift().distance;
+        
+        if(distance) {
+          resolve(distance.value / 1000);
+        }
+        
+        resolve(0);
       } else {
         reject('Wrong address: Address not found by Google Maps API.');
       }
