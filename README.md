@@ -2,9 +2,9 @@
 > I choose a lazy person to do a hard job. Because a lazy person will find an easy way to do it.
 > - Bill Gates
 
-I must also admit that I am a lazy person and I do not like to do things that repeat themselves. I like to learn new things and I like to create things in Node JS. In my job, sometimes I need to find the travel distance between two addresses. For example I need calculate travel costs in the bid. Because I didn't like to manually enter addresses into Google Maps and then rewrite distance to Excel.
+I must admit that I am a lazy person and I do not like to do things that are constantly being repeated. I like to learn new things and I like to create things in Node JS. Sometimes in my job I need to find the travel distance between two addresses, for example when I need to calculate travel costs in the bid. And I find it unnecessary to enter addresses into Google Maps and then rewrite the distance back to Excel.
 
-This code uses Express to create an endpoint that calls the function written in the VBA. The function is embedded in Excel into a module to write a simple function into the cell. So for example I can write expressions with distance results.
+This code uses Express to create an endpoint. Function written in the VBA calls this endpoint to get distance between two addresses. The function is embedded in Excel into a module to write a simple function into the cell. So for example I can write expressions with distance results.
 
 ![Example usage in Excel](https://raw.githubusercontent.com/LabZoneSK/excel-google-maps/master/example/Excel-Sample.jpg)
 
@@ -37,5 +37,9 @@ Public Function findDistance(ByVal Origin As String, _
 
 End Function
 ```
+
+Then you can use function in expression in a cell. For example:
+`=ROUNDUP(findDistance(B2;C2);0)`
+(calculates distance between two addresses (in cells B2 and C2) and round up number without decimals)
 
 *DISCLAIMER - I am not VBA expert. I know that VBA expert can write this purely in VBA without need for Express side. Please, do not blame me for my weakness. :-)*
