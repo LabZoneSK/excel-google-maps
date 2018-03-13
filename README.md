@@ -32,7 +32,7 @@ Public Function findDistance(ByVal Origin As String, _
     objHTTP.setRequestHeader "Content-Type", "application/json"
     objHTTP.send
     
-    Debug.Print objHTTP.ResponseText
+    ' Conversion required for my regional settings. If you not require do not replace comma and dots
     findDistance = Replace(CStr(objHTTP.ResponseText), ".", ",")
 
 End Function
